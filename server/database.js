@@ -1,5 +1,13 @@
 const mongoose = require("mongoose");
 
+function isIterable(obj) {
+    // checks for null and undefined
+    if (obj === null || obj === undefined) {
+      return false;
+    }
+    return typeof obj[Symbol.iterator] === 'function';
+}
+
 class Database {
     /**
      * Adds objects to a MongoDB database using the Mongoose API.
@@ -7,7 +15,10 @@ class Database {
      * @param
      *  There are no parameters in this function, but javascript allows for
      *  variadic arguments. In other words, as many objects can be passed to
-     *  this function as one may like.
+     *  this function as one may like. 
+     * 
+     *  If the first argument is an array of objects,
+     *  then those objects are added and any arguments following the array are ignored.
      * 
      *  Each object is assumed to be defined by a valid mongoose schema, and that
      *  all optional fields are filled in with a default value if not already set
@@ -20,7 +31,13 @@ class Database {
      * 
      */
     static insert() {
-        for(let elem of arguments) {
+        if(isIterable(arguments[0])) {
+            var objs = arguments[0];
+        }
+        else {
+            var objs = arguments;
+        }
+        for(let elem of objs) {
             elem.save();
         }
     }
