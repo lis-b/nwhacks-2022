@@ -292,7 +292,7 @@ var recipies = [
 
 var users = [
     User1.user,
-    User2,user
+    User2.user
 ];
 
 // Setup the database
