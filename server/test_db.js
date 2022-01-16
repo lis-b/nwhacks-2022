@@ -27,15 +27,15 @@ var ingredients_list = ["butter","apple"];
 var queryObj = {"ingredients.ingredient": {$in: ingredients_list}};
 
 var queryObj2_diff = null;
-var queryObj2_time = 1;
+var queryObj2_time = null;
 var queryObj2_ingredients = [];
-var queryObj2 = {$and : [
-    excludeIfNull('difficulty',queryObj2_diff),
-    excludeIfNull('time',queryObj2_time),
-    excludeIfEmpty('\"ingredients.ingredient\"','$in',queryObj2_ingredients)
-].filter(field=>field !== null)};
+// var queryObj2 = {$and : [
+//     excludeIfNull('difficulty',queryObj2_diff),
+//     excludeIfNull('time',queryObj2_time),
+//     excludeIfEmpty('\"ingredients.ingredient\"','$in',queryObj2_ingredients)
+// ].filter(field=>field !== null)};
 const projectObj = {_id:1,name:1,time:1,difficulty:1,description:1,rating:1};
-
+console.log(queryObj2);
 ///// DEBUG THIS
 function excludeIfNull(key,value){
     return value === null ? null : {[key] : value};
@@ -48,6 +48,19 @@ function excludeIfEmpty(key,operator,values){
 function deepcopy(obj) {
     return JSON.parse(JSON.stringify(obj));
 }
+
+function constructQuery(difficulty,time,ingredients) {
+    var queryObj = { $and : [
+        excludeIfNull('difficulty', difficulty),
+        excludeIfNull('time', time),
+        excludeIfEmpty('\"ingredients.ingredient\"','$in', ingredients)
+    ].filter(field => field !== null)}; //filter out empty/null
+    
+    //if its empty replace it with a query all - $and doesn't support empty list
+    return queryObj.$and.length === 0 ? {} : queryObj; 
+}
+
+var queryObj2 = constructQuery(queryObj2_diff,queryObj2_time,queryObj2_ingredients);
 
 // Promise.resolve(Database.insert([User1, User2])).then(() => {
     // Promise.resolve(Database.get(User, {username : "pat123"})).then((result) => {
@@ -98,6 +111,8 @@ Database.get(Recipe, queryObj2).select(projectObj)
     .catch((err) => {
         console.log(err);
 });
+
+
 // // Add users to database
 // Database.insert([User1, User2]);
 

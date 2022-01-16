@@ -1,16 +1,28 @@
-const difficultyStringArray = ["beginner", "intermediate", "advanced"];
-const timeStringArray = ["<1 hour", "1-2 hours", "2-3 hours", ">3 hours"];
+///////////////////////////////////////////////////////
+///////// Constants for frontend and backend //////////
+///////////////////////////////////////////////////////
+const difficultyList = ["beginner", "intermediate", "advanced"];
+const timeStringList = ["<1 hour", "1-2 hours", "2-3 hours", ">3 hours"];
+const ingredientsList = [];
 
 class Constants {
 
     static get difficulties() {
-        return difficultyStringArray;
+        return difficultyList;
     }
 
     static get times() {
-        return timeStringArray;
+        return timeStringList;
+    }
+    
+    static get ingredients() {
+        return ingredientsList;
     }
 }
+///////////////////////////////////////////////////////
+
+
+///////// DUMMY DB ENTRIES FOR TESTING ////////////////
 
 class User1 {
     static get user() {
@@ -81,4 +93,5 @@ module.exports = {
     LobsterBisque:LobsterBisque,
     User1:User1,
     User2:User2,
+
 }
