@@ -21,7 +21,7 @@ function Search() {
 
   const [constants, setConstants] = useState({
     ingredients: ["one", "two", "three"],
-    time: ["<1 hour", "1-2 hours", "2-3 hours", ">3 hours"],
+    time: [],
     difficulty: ["beginner", "intermediate", "advanced"],
   });
   const [filterDifficulty, setFilterDifficulty] = useState(null);
@@ -57,14 +57,24 @@ function Search() {
   };
 
   const fetchConstants = () => {
-    fetch(`${BACKEND_URL}/api/constants`)
-      .then((result) => result.json())
+    const requestOptions = {
+      headers : {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }
+    fetch(`http://localhost:5000/api/constants`, requestOptions)
+      .then((result) => {
+        let json = result.json();
+        console.log(json)
+        return json})
       .then(
         (result) => {
           setSearchResults(result);
         },
         (error) => {
           setFilterError(true);
+          console.log(error);
         }
       );
   };

@@ -106,11 +106,19 @@ router.get('/recipe/:recipeID', function(req,res,next){
 });
 
 router.get('/constants', function(req,res,next) {
-    res.status(200).json({
+    // res.set({
+    //     "Content-Type": "application/json",
+    //     "Access-Control-Allow-Origin": "*"
+    // });
+    console.log(req);
+    var json_obj={
         difficulty: Constants.difficulties,
         time: Constants.times,
         ingredients: Constants.ingredients
-    });
+    };
+    console.log(json_obj);
+    // res.setHeader('Content-Type', 'application/json')
+    res.send(JSON.stringify(json_obj));
 })
 
 module.exports = router;
