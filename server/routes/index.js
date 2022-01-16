@@ -110,6 +110,60 @@ router.get('/constants', function(req,res,next) {
         time: Constants.times,
         ingredients: Constants.ingredients
     });
-})
+});
+
+router.post('/upvote/recipe/:recipeID', function(req, res, next) {
+    let recipeID = req.params.recipeID;
+    Database.getById(Recipe, recipeID)
+        .then((result) => {
+            if(result === null) {
+                res.status(404);
+            }
+            else {
+                let upvotes = result.rating[0] + 1;
+                let downvotes = result.rating[1];
+                let updated_rating = [upvotes, downvotes];
+                Database.updateOne(Recipe, {_id : recipeID}, {rating: updated_rating})
+                    .then((result) => {
+                        if(result.acknowledged && result.modifiedCount == 1) {
+                            res.status(200);
+                        }
+                        else {
+                            res.status(404);
+                        }
+                });
+            }
+        })
+        .err((err) => {
+            res.status(500).json(err);
+        });
+});
+
+router.post('/downvote/recipe/:recipeID', function(req, res, next) {
+    let recipeID = req.params.recipeID;
+    Database.getById(Recipe, recipeID)
+        .then((result) => {
+            if(result === null) {
+                res.status(404);
+            }
+            else {
+                let upvotes = result.rating[0];
+                let downvotes = result.rating[1] + 1;
+                let updated_rating = [upvotes, downvotes];
+                Database.updateOne(Recipe, {_id : recipeID}, {rating: updated_rating})
+                    .then((result) => {
+                        if(result.acknowledged && result.modifiedCount == 1) {
+                            res.status(200);
+                        }
+                        else {
+                            res.status(404);
+                        }
+                });
+            }
+        })
+        .err((err) => {
+            res.status(500).json(err);
+        });
+});
 
 module.exports = router;
