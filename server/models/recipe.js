@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-const Constants = require('../constants.js');
+const {Constants} = require('../constants.js');
 
 var RecipeSchema = new Schema(
     {
@@ -10,10 +10,11 @@ var RecipeSchema = new Schema(
         time: {type:Number, required: true},
         difficulty: {type:Number, required: true},
         description: String,
-        ingredients: [String],
+        ingredients: {type:[String], required:true},
         steps: {type:[String], required:true},
         rating: [Number],
         country: String,
+        image: String, //return a filepath relative to react app.
         user: {type: Schema.Types.ObjectId, ref: 'User'}
     }
 );

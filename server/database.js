@@ -13,12 +13,7 @@ class Database {
      * Adds objects to a MongoDB database using the Mongoose API.
      * 
      * @param
-     *  There are no parameters in this function, but javascript allows for
-     *  variadic arguments. In other words, as many objects can be passed to
-     *  this function as one may like. 
-     * 
-     *  If the first argument is an array of objects,
-     *  then those objects are added and any arguments following the array are ignored.
+     *  An array of objects. Objects are added and any arguments following the array are ignored.
      * 
      *  Each object is assumed to be defined by a valid mongoose schema, and that
      *  all optional fields are filled in with a default value if not already set
@@ -30,14 +25,8 @@ class Database {
      *  Adds all objects to the database.
      * 
      */
-    static insert() {
-        if(isIterable(arguments[0])) {
-            var objs = arguments[0];
-        }
-        else {
-            var objs = arguments;
-        }
-        for(let elem of objs) {
+    static insert(arr) {
+        for(let elem of arr) {
             elem.save();
         }
     }
