@@ -23,28 +23,28 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // Promise.resolve(Database.insert([User1, User2])).then(() => {
-//     Database.get(User, {username : "pat123"}).then((result) => {
-//         console.log(result);
-//         Database.get(User, {username : "bonjour_croissant"}).then((result) => {
-//             console.log(result);
-//             Database.deleteOne(User, {username : "pat123"}).then((result) => {
-//                 console.log(result);
-//                 Promise.resolve(Database.insert([LobsterBisque])).then(() => {
-//                     Database.get(Recipe, {ingredients : "4 tbsp. butter"}).then((result) => {
-//                         console.log(result);
-//                         Database.updateOne(Recipe, {name:"Lobster Bisque"}, {difficulty : 2}).then((result) => {
-//                             console.log(result);
-//                         })
-//                     })
-//                 })
-//             })
-//         })
-//     })
+    Promise.resolve(Database.get(User, {username : "pat123"})).then((result) => {
+        console.log(result);
+        Database.get(User, {username : "bonjour_croissant"}).then((result) => {
+            console.log(result);
+            Database.deleteOne(User, {username : "pat123"}).then((result) => {
+                console.log(result);
+                Promise.resolve(Database.insert([LobsterBisque])).then(() => {
+                    Database.get(Recipe, {name:"Lobster Bisque"}).then((result) => {
+                        console.log(result);
+                        Database.updateOne(Recipe, {name:"Lobster Bisque"}, {difficulty : 2}).then((result) => {
+                            console.log(result);
+                        })
+                    })
+                })
+            })
+        })
+    });
 // });
 
-Database.get(Recipe, {ingredients : { $in: ["4 tbsp. butter","apple"]}}).then((result => {
-    console.log(result);
-}));
+// Database.get(Recipe, {ingredients : { $in: ["4 tbsp. butter","apple"]}}).then((result => {
+//     console.log(result);
+// }));
 
 // // Add users to database
 // Database.insert([User1, User2]);
