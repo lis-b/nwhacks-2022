@@ -26,7 +26,7 @@ class LobsterBisque {
                 {ingredient: "tomato paste", quantity: "2 tbsp"},
                 {ingredient: "all purpose flour", quantity: "2 tbsp"},
                 {ingredient: "fish stalk", quantity: "4 cups"},
-                {ingredient: "wine", quantity: "1 1/4 cups, must be dry white"},
+                {ingredient: "white wine", quantity: "1 1/4 cups"},
                 {ingredient: "bay leaf", quantity: "1"},
                 {ingredient: "thyme", quantity: "3 sprigs"},
                 {ingredient: "heavy cream", quantity: "1/2 cup"},
