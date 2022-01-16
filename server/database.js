@@ -108,6 +108,35 @@ class Database {
         let delcount = await collection.deleteMany(query);
         return delcount;
     }
+
+    /**
+     * 
+     * @param {Mongoose.Schema} collection
+     *  The name of the collection that is to be queried.
+     * 
+     * @param {object} query
+     *  The object that contains the query information. It is assumed that all
+     *  fields that are used to query the collection follow its corresponding
+     *  schema.
+     * 
+     * @param {object} updatedFields
+     *  The object that contains the updated data. It is assumed that all
+     *  fields that are used to query the collection follow its corresponding
+     *  schema.
+     * 
+     * @returns {object}
+     *  Returns an object that gives statistics on what happened during the update:
+     *  
+     *   res.matchedCount   Number of documents matched
+     *   res.modifiedCount  Number of documents modified
+     *   res.acknowledged   Boolean indicating everything went smoothly.
+     *   res.upsertedId     null or an id containing a document that had to be upserted.
+     *   res.upsertedCount  Number indicating how many documents had to be upserted. Will either be 0 or 1.
+     */
+    static updateOne(collection, query, updatedFields) {
+        const res = await collection.updateOne(query, updatedFields);
+        return res;
+    }
 }
 
 module.exports = Database;
