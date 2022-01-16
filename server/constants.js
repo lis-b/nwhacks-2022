@@ -71,10 +71,6 @@ class LobsterBisque {
     }   
 }
 
-class  {
-
-}
-
 module.exports = {
     Constants:Constants,
     LobsterBisque:LobsterBisque,
