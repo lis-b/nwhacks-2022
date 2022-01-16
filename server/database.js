@@ -42,6 +42,24 @@ class Database {
     }
 
     /**
+     * Queries a MongoDB database using the Mongoose API.
+     * 
+     * @param {Mongoose.Schema} collection
+     *  The name of the collection to be queried.
+     * 
+     * @param {string} id
+     *  The id of the object that is queried for in the database.
+     *  
+     * @returns {Promise}
+     *  Returns a Promise that resolves to the results of the query upon success.
+     *  If an error occurs, then the Promise rejects.
+     * 
+     */
+    static getById(collection, id) {
+        return collection.findById(id);
+    }
+
+    /**
      * Deletes one object from the database that matches the query.
      * 
      * @param {Mongoose.Schema} collection
