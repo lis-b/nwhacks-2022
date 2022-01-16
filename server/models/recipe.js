@@ -10,9 +10,12 @@ var RecipeSchema = new Schema(
         time: {type:Number, required: true},
         difficulty: {type:Number, required: true},
         description: String,
-        ingredients: {type:[String], required:true},
+        ingredients: [{
+            ingredient: String,
+            quantity: String,
+        }],
         steps: {type:[String], required:true},
-        rating: [Number],
+        rating: [Number], // [upvotes,downvotes]
         country: String,
         image: String, //return a filepath relative to react app.
         user: {type: Schema.Types.ObjectId, ref: 'User'}
