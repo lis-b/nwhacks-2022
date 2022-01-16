@@ -280,19 +280,19 @@ class User2 {
 }
 
 var recipies = [
-    LobsterBisque.recipe,
-    BLT.recipe,
-    Cookies.recipe,
-    GrilledCheese.recipe,
-    Onigiri.recipe,
-    PotatoSalad.recipe,
-    OvenToast.recipe,
-    Lasagna.recipe
+    new Recipe(LobsterBisque.recipe),
+    new Recipe(BLT.recipe),
+    new Recipe(Cookies.recipe),
+    new Recipe(GrilledCheese.recipe),
+    new Recipe(Onigiri.recipe),
+    new Recipe(PotatoSalad.recipe),
+    new Recipe(OvenToast.recipe),
+    new Recipe(Lasagna.recipe)
 ];
 
 var users = [
-    User1.user,
-    User2,user
+    new User(User1.user),
+    new User(User2.user)
 ];
 
 // Setup the database
