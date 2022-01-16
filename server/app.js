@@ -14,13 +14,5 @@ app.use('/api', index);
 
 ///////////////////////////////
 
-// TESTING
-app.get('/', function(req, res) {
-    return res.send("Hello World!");
-});
-
-///////////////////////////////
-
-
 // Export the app module to use in server.js
 module.exports = app;
