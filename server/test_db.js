@@ -23,7 +23,7 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // Add users to database
-// Database.insert([User1, User2]);
+Database.insert([User1, User2]);
 
 Database.get(User, {username : "pat123"}).then((result) => {
     console.log(result);
@@ -31,12 +31,17 @@ Database.get(User, {username : "pat123"}).then((result) => {
 
 Database.get(User, {username : "bonjour_croissant"}).then((result) => {
     console.log(result);
-});
+}).finally();
 
-Database.deleteOne(User, {username : "bonjour_croissant"}).then((result) => {
-    console.log(result);
-});
+Database.insert([LobsterBisque]);
 
-Database.get(User, {username : "bonjour_croissant"}).then((result) => {
-    console.log(result);
-});
+Database.updateOne(Recipe, {name:"Lobster Bisque"},something);
+// async function test_delete(){
+//     console.log(await Database.deleteOne(User, {username : "pat123"}));
+// }
+
+// test_delete();
+
+// Database.get(User, {username : "pat123"}).then((result) => {
+//     console.log(result);
+// });
