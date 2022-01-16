@@ -1,13 +1,3 @@
-const mongoose = require("mongoose");
-
-function isIterable(obj) {
-    // checks for null and undefined
-    if (obj === null || obj === undefined) {
-      return false;
-    }
-    return typeof obj[Symbol.iterator] === 'function';
-}
-
 class Database {
     /**
      * Adds objects to a MongoDB database using the Mongoose API.
@@ -48,16 +38,7 @@ class Database {
      * 
      */
     static get(collection, query) {
-        return new Promise((resolve, reject) => {
-            collection.find(query, (err, results) => {
-                if(err) {
-                    reject(err);
-                }
-                else {
-                    resolve(results);
-                }
-            });
-        });
+        return collection.find(query);
     }
 
     /**
@@ -71,12 +52,12 @@ class Database {
      *  fields that are used to query the collection follow its corresponding
      *  schema.
      * 
-     * @returns {Number}
-     *  Returns the number of objects that were removed from the database.
+     * @returns {Promise}
+     *  Returns a promise that resolves to the number of objects that were removed 
+     *  from the database.
      */
     static deleteOne(collection, query) {
-        let delcount = await collection.deleteOne(query);
-        return delcount;
+        return collection.deleteOne(query);
     }
 
     /**
@@ -90,12 +71,12 @@ class Database {
      *  fields that are used to query the collection follow its corresponding
      *  schema.
      * 
-     * @returns {Number}
-     *  Returns the number of objects that were removed from the database.
+     * @returns {Promise}
+     *  Returns a promise that resolves to the number of objects that were removed 
+     *  from the database.
      */
     static deleteMany(collection, query) {
-        let delcount = await collection.deleteMany(query);
-        return delcount;
+        return collection.deleteMany(query);
     }
 
     /**
@@ -113,8 +94,9 @@ class Database {
      *  fields that are used to query the collection follow its corresponding
      *  schema.
      * 
-     * @returns {object}
-     *  Returns an object that gives statistics on what happened during the update:
+     * @returns {Promise}
+     *  Returns a promise that resolves to an object that gives statistics on what
+     *  happened during the update:
      *  
      *   res.matchedCount   Number of documents matched
      *   res.modifiedCount  Number of documents modified
@@ -123,8 +105,7 @@ class Database {
      *   res.upsertedCount  Number indicating how many documents had to be upserted. Will either be 0 or 1.
      */
     static updateOne(collection, query, updatedFields) {
-        const res = await collection.updateOne(query, updatedFields);
-        return res;
+        return collection.updateOne(query, updatedFields);
     }
 }
 
