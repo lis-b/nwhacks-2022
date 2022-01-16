@@ -23,7 +23,27 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 var ingredients_list = ["butter","apple"];
+
 var queryObj = {"ingredients.ingredient": {$in: ingredients_list}};
+
+var queryObj2_diff = 1;
+var queryObj2_time = 1;
+var queryObj2_ingredients = ["butter","apple"];
+var queryObj2 = {$and : [
+    excludeIfNull('difficulty',queryObj2_diff),
+    excludeIfNull('time',queryObj2_time),
+    excludeIfEmpty('\"ingredients.ingredient\"','$in',queryObj2_ingredients)
+]};
+const projectObj = {_id:1,name:1,time:1,difficulty:1,description:1,rating:1};
+
+///// DEBUG THIS
+function excludeIfNull(key,value){
+    return value === null ? null : {[key] : value};
+}
+
+function excludeIfEmpty(key,operator,value){
+    return value.length === 0 ? null : {[key] : {[operator] : values}};
+}
 
 // Promise.resolve(Database.insert([User1, User2])).then(() => {
     // Promise.resolve(Database.get(User, {username : "pat123"})).then((result) => {
@@ -53,6 +73,27 @@ Database.get(Recipe, queryObj).then((result=>{
     console.log(result);
 }));
 
+Database.get(Recipe, queryObj2).project(projectObj)
+    .then((result) => {
+        if(result.length === 0) { //DEBUG?
+            console.log(404);
+        }
+        else {
+            let retarr = [];
+            for (let obj of result){
+                let retobj = deepcopy(obj);
+                let id = retobj._id.toString();
+                delete retobj._id;
+                retobj.id = id;
+                console.log(retobj);
+                retarr.push(retobj);
+            }
+        }
+        console.log(retarr);
+    })
+    .catch((err) => {
+        console.log(err);
+});
 // // Add users to database
 // Database.insert([User1, User2]);
 
