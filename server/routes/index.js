@@ -9,15 +9,13 @@ function deepcopy(obj) {
     return JSON.parse(JSON.stringify(obj));
 }
 
-///// DEBUG THIS
 function excludeIfNull(key,value){
     return value === null ? null : {[key] : value};
 }
 
-function excludeIfEmpty(key,operator,value){
-    return value.length === 0 ? null : {[key] : {[operator] : values}};
+function excludeIfEmpty(key,operator,values){
+    return values.length === 0 ? null : {[key] : {[operator] : values}};
 }
-///// END OF DEBUG
 
 /**
  *  WHAT WE EXPECT TO GET FROM FRONTEND
@@ -34,16 +32,14 @@ function excludeIfEmpty(key,operator,value){
  * 
  */
 router.get('/search_view', function(req,res,next){
-    //TODO
-    //REMEMBER TO GET RID OF _id AND GIVE id with a string
     var queryObj = {$and : [
         excludeIfNull('difficulty',req.body.difficulty),
         excludeIfNull('time',req.body.time),
         excludeIfEmpty('\"ingredients.ingredient\"','$in',req.body.ingredients)
-    ]};
-    Database.get(Recipe,queryObj).project(projectObj)
+    ].filter(field => field !== null)};
+    Database.get(Recipe,queryObj).select(projectObj)
         .then((result) => {
-            if(result.length === 0) { //DEBUG?
+            if(result.length === 0) { 
                 res.status(404);
             }
             else {
@@ -56,8 +52,8 @@ router.get('/search_view', function(req,res,next){
                     console.log(retobj);
                     retarr.push(retobj);
                 }
-            }
-            res.status(200).json(retarr);
+                res.status(200).json(retarr);
+            }  
         })
         .catch((err) => {
             res.status(500).json(err);

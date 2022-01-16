@@ -26,14 +26,14 @@ var ingredients_list = ["butter","apple"];
 
 var queryObj = {"ingredients.ingredient": {$in: ingredients_list}};
 
-var queryObj2_diff = 1;
+var queryObj2_diff = null;
 var queryObj2_time = 1;
-var queryObj2_ingredients = ["butter","apple"];
+var queryObj2_ingredients = [];
 var queryObj2 = {$and : [
     excludeIfNull('difficulty',queryObj2_diff),
     excludeIfNull('time',queryObj2_time),
     excludeIfEmpty('\"ingredients.ingredient\"','$in',queryObj2_ingredients)
-]};
+].filter(field=>field !== null)};
 const projectObj = {_id:1,name:1,time:1,difficulty:1,description:1,rating:1};
 
 ///// DEBUG THIS
@@ -41,8 +41,12 @@ function excludeIfNull(key,value){
     return value === null ? null : {[key] : value};
 }
 
-function excludeIfEmpty(key,operator,value){
-    return value.length === 0 ? null : {[key] : {[operator] : values}};
+function excludeIfEmpty(key,operator,values){
+    return values.length === 0 ? null : {[key] : {[operator] : values}};
+}
+
+function deepcopy(obj) {
+    return JSON.parse(JSON.stringify(obj));
 }
 
 // Promise.resolve(Database.insert([User1, User2])).then(() => {
@@ -69,11 +73,11 @@ function excludeIfEmpty(key,operator,value){
 //     console.log(result);
 // }));
 
-Database.get(Recipe, queryObj).then((result=>{
-    console.log(result);
-}));
+// Database.get(Recipe, queryObj).then((result=>{
+//     console.log(result);
+// }));
 
-Database.get(Recipe, queryObj2).project(projectObj)
+Database.get(Recipe, queryObj2).select(projectObj)
     .then((result) => {
         if(result.length === 0) { //DEBUG?
             console.log(404);
@@ -88,8 +92,8 @@ Database.get(Recipe, queryObj2).project(projectObj)
                 console.log(retobj);
                 retarr.push(retobj);
             }
+            console.log(retarr);
         }
-        console.log(retarr);
     })
     .catch((err) => {
         console.log(err);
