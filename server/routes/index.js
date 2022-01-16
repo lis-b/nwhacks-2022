@@ -75,6 +75,12 @@ router.post('/search_view',  function(req,res,next){
                     console.log(retobj);
                     retarr.push(retobj);
                 }
+                retarr.sort(function(o1, o2) {
+                    let o1_score = o1.rating[0] - o1.rating[1];
+                    let o2_score = o2.rating[0] - o2.rating[1];
+                    return o2_score - o1_score;
+                });
+                console.log(retarr);
                 res.status(200).json(retarr);
             }  
         })
