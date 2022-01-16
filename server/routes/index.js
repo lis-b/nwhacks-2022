@@ -110,7 +110,6 @@ router.get('/constants', function(req,res,next) {
     //     "Content-Type": "application/json",
     //     "Access-Control-Allow-Origin": "*"
     // });
-    console.log(req);
     var json_obj={
         difficulty: Constants.difficulties,
         time: Constants.times,
@@ -118,7 +117,7 @@ router.get('/constants', function(req,res,next) {
     };
     console.log(json_obj);
     // res.setHeader('Content-Type', 'application/json')
-    res.send(JSON.stringify(json_obj));
+    res.status(200).json(json_obj);
 })
 
 module.exports = router;
