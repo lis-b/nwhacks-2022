@@ -113,11 +113,12 @@ router.get('/constants', function(req,res,next) {
 });
 
 router.post('/upvote/recipe/:recipeID', function(req, res, next) {
+    console.log('arrived');
     let recipeID = req.params.recipeID;
     Database.getById(Recipe, recipeID)
         .then((result) => {
             if(result === null) {
-                res.status(404);
+                res.status(404).send();
             }
             else {
                 let upvotes = result.rating[0] + 1;
@@ -126,15 +127,15 @@ router.post('/upvote/recipe/:recipeID', function(req, res, next) {
                 Database.updateOne(Recipe, {_id : recipeID}, {rating: updated_rating})
                     .then((result) => {
                         if(result.acknowledged && result.modifiedCount == 1) {
-                            res.status(200);
+                            res.status(200).send("success!");
                         }
                         else {
-                            res.status(404);
+                            res.status(404).send("oops!");
                         }
                 });
             }
         })
-        .err((err) => {
+        .catch((err) => {
             res.status(500).json(err);
         });
 });
@@ -144,7 +145,7 @@ router.post('/downvote/recipe/:recipeID', function(req, res, next) {
     Database.getById(Recipe, recipeID)
         .then((result) => {
             if(result === null) {
-                res.status(404);
+                res.status(404).send();
             }
             else {
                 let upvotes = result.rating[0];
@@ -153,15 +154,15 @@ router.post('/downvote/recipe/:recipeID', function(req, res, next) {
                 Database.updateOne(Recipe, {_id : recipeID}, {rating: updated_rating})
                     .then((result) => {
                         if(result.acknowledged && result.modifiedCount == 1) {
-                            res.status(200);
+                            res.status(200).send("success!");
                         }
                         else {
-                            res.status(404);
+                            res.status(404).send("oops");
                         }
                 });
             }
         })
-        .err((err) => {
+        .catch((err) => {
             res.status(500).json(err);
         });
 });
