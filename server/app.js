@@ -12,8 +12,13 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.use(cors());
 app.use(express.json());
 // app.use(express.urlencoded());
+
 // Write any app.use statements for any required routers...
-app.use('/api', index);
+// Used Localled
+// app.use('/api', index);
+
+// Used remotely
+// app.use('./netlify/functions/server', index);
 
 ///////////////////////////////
 
