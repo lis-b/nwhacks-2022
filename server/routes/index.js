@@ -31,7 +31,7 @@ function constructQuery(difficulty,time,ingredients) {
     var queryObj = { $and : [
         excludeIfNull('difficulty', difficulty),
         excludeIfNull('time', time),
-        excludeIfEmpty('\"ingredients.ingredient\"','$in', ingredients)
+        excludeIfEmpty("ingredients.ingredient",'$all', ingredients)
     ].filter(field => field !== null)}; //filter out empty/null
     
     //if its empty replace it with a query all - $and doesn't support empty list
@@ -54,11 +54,10 @@ function constructQuery(difficulty,time,ingredients) {
  *  In the returned object, we want to stringify the ID for url purposes
  * 
  */
-router.post('/search_view', express.json({type: '*/*'}), function(req,res,next){
+router.post('/search_view',  function(req,res,next){
     // Construct a query object
     // If a field is blank, we want to exclude that from the query
     // an all blank query should give us everything
-    console.log(req.body);
     var queryObj = constructQuery(req.body.difficulty, req.body.time, req.body.ingredients);
 
     Database.get(Recipe,queryObj).select(projectObj)

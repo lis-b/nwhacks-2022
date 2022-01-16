@@ -22,20 +22,21 @@ var db = mongoose.connection;
 //Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-var ingredients_list = ["butter","apple"];
+var ingredients_list = ["cheese","bread"];
 
-var queryObj = {"ingredients.ingredient": {$in: ingredients_list}};
+// $in ["apple","butter"]
+
+var queryObj = {"ingredients.ingredient": { $all : ["cheese","bread"]}};
 
 var queryObj2_diff = null;
 var queryObj2_time = null;
-var queryObj2_ingredients = [];
+var queryObj2_ingredients = ["cheese", "bread"];
 // var queryObj2 = {$and : [
 //     excludeIfNull('difficulty',queryObj2_diff),
 //     excludeIfNull('time',queryObj2_time),
 //     excludeIfEmpty('\"ingredients.ingredient\"','$in',queryObj2_ingredients)
 // ].filter(field=>field !== null)};
 const projectObj = {_id:1,name:1,time:1,difficulty:1,description:1,rating:1};
-console.log(queryObj2);
 ///// DEBUG THIS
 function excludeIfNull(key,value){
     return value === null ? null : {[key] : value};
@@ -49,11 +50,19 @@ function deepcopy(obj) {
     return JSON.parse(JSON.stringify(obj));
 }
 
+var queryObj2hand = { $and : [
+    {difficulty:1},
+    {time:1},
+    {'ingredients.ingredient' : {$all:["bread","cheese"]}}
+]
+
+}
+
 function constructQuery(difficulty,time,ingredients) {
     var queryObj = { $and : [
         excludeIfNull('difficulty', difficulty),
         excludeIfNull('time', time),
-        excludeIfEmpty('\"ingredients.ingredient\"','$in', ingredients)
+        excludeIfEmpty("ingredients.ingredient",'$all', ingredients)
     ].filter(field => field !== null)}; //filter out empty/null
     
     //if its empty replace it with a query all - $and doesn't support empty list
@@ -61,7 +70,7 @@ function constructQuery(difficulty,time,ingredients) {
 }
 
 var queryObj2 = constructQuery(queryObj2_diff,queryObj2_time,queryObj2_ingredients);
-
+console.log(queryObj2);
 // Promise.resolve(Database.insert([User1, User2])).then(() => {
     // Promise.resolve(Database.get(User, {username : "pat123"})).then((result) => {
     //     console.log(result);
