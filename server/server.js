@@ -18,7 +18,7 @@ app.use(cors());
 app.use(express.json());
 
 // app.use('/api', index);
-app.use('./netlify/functions/server', index);
+app.use('/.netlify/functions/server', index);
 
 // USED LOCALLY
 /*
