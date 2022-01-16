@@ -22,20 +22,40 @@ var db = mongoose.connection;
 //Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-// Add users to database
-Database.insert([User1, User2]);
-
-Database.get(User, {username : "pat123"}).then((result) => {
-    console.log(result);
+Promise.resolve(Database.insert([User1, User2])).then(() => {
+    Database.get(User, {username : "pat123"}).then((result) => {
+        console.log(result);
+        Database.get(User, {username : "bonjour_croissant"}).then((result) => {
+            console.log(result);
+            Database.deleteOne(User, {username : "pat123"}).then((result) => {
+                console.log(result);
+                Promise.resolve(Database.insert([LobsterBisque])).then(() => {
+                    Database.get(Recipe, {name : "LobsterBisque"}).then((result) => {
+                        console.log(result);
+                        Database.updateOne(Recipe, {name:"Lobster Bisque"}, {difficulty : 2}).then((result) => {
+                            console.log(result);
+                        })
+                    })
+                })
+            })
+        })
+    })
 });
 
-Database.get(User, {username : "bonjour_croissant"}).then((result) => {
-    console.log(result);
-}).finally();
+// // Add users to database
+// Database.insert([User1, User2]);
 
-Database.insert([LobsterBisque]);
+// Database.get(User, {username : "pat123"}).then((result) => {
+//     console.log(result);
+// });
 
-Database.updateOne(Recipe, {name:"Lobster Bisque"},something);
+// Database.get(User, {username : "bonjour_croissant"}).then((result) => {
+//     console.log(result);
+// });
+
+// Database.insert([LobsterBisque]);
+
+// Database.updateOne(Recipe, {name:"Lobster Bisque"}, {difficulty : 2});
 // async function test_delete(){
 //     console.log(await Database.deleteOne(User, {username : "pat123"}));
 // }
