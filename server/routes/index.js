@@ -134,7 +134,7 @@ router.post('/upvote/recipe/:recipeID', function(req, res, next) {
                 });
             }
         })
-        .err((err) => {
+        .catch((err) => {
             res.status(500).json(err);
         });
 });
@@ -161,7 +161,7 @@ router.post('/downvote/recipe/:recipeID', function(req, res, next) {
                 });
             }
         })
-        .err((err) => {
+        .catch((err) => {
             res.status(500).json(err);
         });
 });
