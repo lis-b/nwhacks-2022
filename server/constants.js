@@ -12,6 +12,30 @@ class Constants {
     }
 }
 
+class User1 {
+    static get user() {
+        return {
+            username: "pat123",
+            email: "pat@cool_walrus_chef.com",
+            password: "12345",
+            first_name: "Pat",
+            last_name: "Applebees",
+        }
+    }
+}
+
+class User2 {
+    static get user() {
+        return {
+            username: "bonjour_croissant",
+            email: "baker123@bakery.fr",
+            password: "baguette",
+            first_name: "Geraldine",
+            last_name: "Louise",
+        }
+    }
+}
+
 class LobsterBisque {
     static get recipe(){
         return {
@@ -54,4 +78,6 @@ class  {
 module.exports = {
     Constants:Constants,
     LobsterBisque:LobsterBisque,
+    User1:User1,
+    User2:User2,
 }

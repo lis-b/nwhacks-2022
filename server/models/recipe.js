@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-const {Constants} = require('../constants.js');
+const Constants = require('../constants.js').Constants;
 
 var RecipeSchema = new Schema(
     {
