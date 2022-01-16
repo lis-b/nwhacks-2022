@@ -113,7 +113,6 @@ router.get('/constants', function(req,res,next) {
 });
 
 router.post('/upvote/recipe/:recipeID', function(req, res, next) {
-    console.log('arrived');
     let recipeID = req.params.recipeID;
     Database.getById(Recipe, recipeID)
         .then((result) => {
