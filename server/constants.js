@@ -3,8 +3,7 @@
 ///////////////////////////////////////////////////////
 const difficultyList = ["beginner", "intermediate", "advanced"];
 const timeStringList = ["<1 hour", "1-2 hours", "2-3 hours", ">3 hours"];
-const ingredientsList = ["bacon","tomato","flour","chocolate chips","eggs","nori seaweed","potatoes",
-                            "cheese","salmon","lettuce","celery"];
+const ingredientsList = ["bacon","tomato","flour","chocolate chips","eggs","nori seaweed","potatoes","cheese","salmon","lettuce","celery","bread"];
 
 class Constants {
 
