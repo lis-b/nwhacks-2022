@@ -17,15 +17,15 @@ class LobsterBisque {
             description: "a nice soup",
             ingredients: [
                 {ingredient: "butter",quantity:"4 tbsp"},
-                {ingredient: "onion", quantity: "1, finely chopped"},
-                {ingredient: "carrots", quantity: "2, peeled and chopped"},
+                {ingredient: "onion", quantity: "1 finely chopped"},
+                {ingredient: "carrots", quantity: "2 peeled and chopped"},
                 {ingredient: "celery", quantity: "2 stalks, finely chopped"},
                 {ingredient: "salt", quantity: "to taste"},
                 {ingredient: "pepper", quantity: "to taste"},
                 {ingredient: "garlic", quantity: "2 cloves"},
                 {ingredient: "tomato paste", quantity: "2 tbsp"},
                 {ingredient: "all purpose flour", quantity: "2 tbsp"},
-                {ingredient: "fish stalk", quantity: "4 cups"},
+                {ingredient: "fish stock", quantity: "4 cups"},
                 {ingredient: "white wine", quantity: "1 1/4 cups"},
                 {ingredient: "bay leaf", quantity: "1"},
                 {ingredient: "thyme", quantity: "3 sprigs"},
@@ -60,7 +60,7 @@ class BLT {
             ],
             steps: [
                 "Cook the slices of bacon in a large skillet over medium-high heat until the bacon reaches a desired crispiness.",
-                "Spread 1 tbsp. on one slice of bread. On the other slice of bread, arrange the bacon, lettuce, tomato slices in your desired order." +
+                "Spread 1 tbsp on one slice of bread. On the other slice of bread, arrange the bacon, lettuce, tomato slices in your desired order. " +
                  "Combine the two slices of bread together to create your B. L. T. sandwich!"
             ],
             rating: [53, 9],
@@ -81,16 +81,16 @@ class Cookies {
                 {ingredient: "sugar", quantity: "1 cup"},
                 {ingredient: "eggs", quantity: "2"},
                 {ingredient: "vanilla extract", quantity: "1 tbsp."},
-                {ingredient: "baking sode", quantity: "1 tsp."},
+                {ingredient: "baking soda", quantity: "1 tsp."},
                 {ingredient: "hot water", quantity: "2 tsp."},
                 {ingredient: "flour", quantity: "3 cups"},
                 {ingredient: "chocolate chips", quantity: "2 cups"},
             ],
             steps: [
                 "Preheat your oven to 175 degrees C (350 degrees F).",
-                "Let the butter soften and whisk it together with the sugar until the mixture is smooth." +
-                 "After mixing, mix in the eggs one at a time. Also mix the vanilla extract with the mixture." +
-                 "Dissolve the baking soda and salt into the hot water. Add dissolved solution to your mixed batter." +
+                "Let the butter soften and whisk it together with the sugar until the mixture is smooth. " +
+                 "After mixing, mix in the eggs one at a time. Also mix the vanilla extract with the mixture. " +
+                 "Dissolve the baking soda and salt into the hot water. Add dissolved solution to your mixed batter. " +
                  "Stir in the flour and chocolate chip until smooth. Place spoonfuls of your batter on ungreased pans or baking trays.",
                  "Once your oven is done preheating, bake your cookies for about 10 minutes or whenever the edges seem nicely browned and crisp."
             ],
@@ -114,14 +114,14 @@ class GrilledCheese {
             ],
 
             steps: [
-                "Spread butter on one side of both slices of bread, place the cheese between" +
-                 "the two slices of bread, and place the grilled cheese on a pan with the sides" +
-                 "with butter on the outside.",
+                "Spread butter on one side of both slices of bread, place the cheese between " +
+                 " the two slices of bread, and place the grilled cheese on a pan with the sides " +
+                 " with butter on the outside.",
 
-                "Turn on the stove and put it on medium heat. Wait for one side to turn into a" +
+                "Turn on the stove and put it on medium heat. Wait for one side to turn into a " +
                   "golden brown and flip the grilled cheese on its other side.",
 
-                "Wait for the other side to turn golden brown. Be careful not to wait too long for" +
+                "Wait for the other side to turn golden brown. Be careful not to wait too long for " +
                 "the second side since it takes much shorter to cook than the first side since the pan is already hot."
             ],
 
@@ -134,7 +134,7 @@ class GrilledCheese {
 class Onigiri {
     static get recipe() {
         return {
-            name: "Onigiti (Japanese Rice Balls)",
+            name: "Onigiri (Japanese Rice Balls)",
             time: 0,
             difficulty: 0,
             description: "Traditional Japanese rice balls that are super simple to make!",
@@ -172,8 +172,8 @@ class PotatoSalad {
                 {ingredient: "vinegar", quantity: "2 tbsp."},
             ],
             steps: [
-                "Peel the potatoes and cut them into bite-sized pieces. Fill a saucepan with water" +
-                 "and place over medium heat. Boil the chopped potatoes to a boil. Lower the flame" +
+                "Peel the potatoes and cut them into bite-sized pieces. Fill a saucepan with water " +
+                 "and place over medium heat. Boil the chopped potatoes to a boil. Lower the flame " +
                  "and cook the potatoes until they are soft. Drain the water and let the potatoes cool.",
 
                  "Slice the celery into thin pieces.",
@@ -230,22 +230,22 @@ class Lasagna {
                 {ingredient: "salt", quantity: "2 tsp."},
             ],
             steps: [
-                "On medium heat, cook beef, onion and garlic until browned." +
-                "Stir in tomato sauce and water. Incorporate seasoning into the pan." +
+                "On medium heat, cook beef, onion and garlic until browned. " +
+                "Stir in tomato sauce and water. Incorporate seasoning into the pan. " +
                 "Simmer with the pan covered for around 1.5 hours. Remember to stir occasionally.",
 
-                "Mix water with a few pinches of salt and bring to a boil. Cook the lasagna noodles" +
+                "Mix water with a few pinches of salt and bring to a boil. Cook the lasagna noodles " +
                 "for around 8 minutes. Drain the noodles. Rise with cold water.",
 
                 "Preheat the oven to 190 degrees C (375 degrees F).",
 
-                "In a baking dish, start assembling the lasagna. Spread 1 cup of the meat sauce at the" +
-                "bottom of the dish. Then spread a layer of lasagna noodles over the sauce. Sprinkle with" +
+                "In a baking dish, start assembling the lasagna. Spread 1 cup of the meat sauce at the " +
+                "bottom of the dish. Then spread a layer of lasagna noodles over the sauce. Sprinkle with " +
                 "grated cheese. Repeat this layering process with the remaining ingredients.",
 
                 "Spray foil with cooking spray and cover the baking dish with the foil.",
 
-                "Bake the assembled dish in the oven for 30 minutes. Remove the foil and bake for another 30 minutes." +
+                "Bake the assembled dish in the oven for 30 minutes. Remove the foil and bake for another 30 minutes. " +
                 "Cool 15 minutes before serving."
             ],
             rating: [419, 66],
